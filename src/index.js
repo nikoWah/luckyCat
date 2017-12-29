@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const Pigpio = process.env.NODE_ENV !== "PRODUCTION" ?
+const Pigpio = process.env.ENVIRONMENT !== "PRODUCTION" ?
   require("pigpio-mock") : require("pigpio");
 
 const Express = require("express");
