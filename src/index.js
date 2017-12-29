@@ -1,4 +1,5 @@
-require('dotenv').config();
+"use strict";
+require("dotenv").config();
 
 const Pigpio = process.env.ENVIRONMENT !== "PRODUCTION" ?
   require("pigpio-mock") : require("pigpio");
@@ -12,8 +13,9 @@ const pin = 18;
 const servoMotor = new Gpio(pin, {mode: Gpio.OUTPUT});
 
 const intervalMillisecond = 50;
-const maxPulse = 1800;
-const minPulse = 800;
+const maxPulse = parseInt(process.env.MAX_PULSE);
+const minPulse = parseInt(process.env.MIN_PULSE);
+const numberOfWave = parseInt(process.env.NUMBER_OF_WAVE);
 
 const yesSpeeches = [
   "Yes, master!", "Yes!", "Sure!", "Meow",
@@ -54,9 +56,9 @@ alexaApp.express({ expressApp: expressApp, checkCert: false, debug: true });
 expressApp.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
 
 const luckyCatWave = () => {
-  let numberOfLoop = 4;
-  let pulseIncrement = 100;
+  let numberOfLoop = numberOfWave;
   let currentPulse = minPulse;
+  let pulseIncrement = 100;
 
   const servoWaveAction = () => {
     servoMotor.servoWrite(currentPulse);
