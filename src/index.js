@@ -17,14 +17,19 @@ const maxPulse = parseInt(process.env.MAX_PULSE);
 const minPulse = parseInt(process.env.MIN_PULSE);
 const numberOfWave = parseInt(process.env.NUMBER_OF_WAVE);
 
-const yesSpeeches = [
+const openDoorSpeeches = [
   "Yes, master!", "Yes!", "Sure!", "Meow",
   "Your wish is my command", "Open sesame",
   "Behold", "Hodor"
 ];
 
-const getRandomYesSpeech = () => {
-  return yesSpeeches[Math.floor(Math.random() * yesSpeeches.length)];
+const whoBuildYouSpeeches = [
+  "watashi no Master wa Niko sama", "My loyalty lies with Niko",
+  "I'm made in Barcelona, by Singapore"
+];
+
+const getRandomSpeeches = (speeches) => {
+  return speeches[Math.floor(Math.random() * speeches.length)];
 }
 
 const alexaApp = new Alexa.app("luckyCat");
@@ -36,7 +41,13 @@ alexaApp.launch(function(request, response) {
 alexaApp.intent("OpenDoor", {},
   function(request, response) {
     luckyCatWave();
-    response.say(getRandomYesSpeech());
+    response.say(getRandomSpeeches(openDoorSpeeches));
+  }
+);
+
+alexaApp.intent("WhoBuildYou", {},
+  function(request, response) {
+    response.say(getRandomSpeeches(whoBuildYouSpeeches));
   }
 );
 
