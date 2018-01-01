@@ -25,7 +25,11 @@ const openDoorSpeeches = [
 
 const whoBuildYouSpeeches = [
   "watashi no Master wa Niko sama", "My loyalty lies with Niko",
-  "I'm made in Barcelona, by Singapore"
+];
+
+const whatDoYouLikeSpeeches = [
+  "everything about ASIA!", "Fish! Definitely fish",
+  "Money! Shiny Coins, notes, and credit cards", "I love Niko"
 ];
 
 const getRandomSpeeches = (speeches) => {
@@ -48,6 +52,12 @@ alexaApp.intent("OpenDoor", {},
 alexaApp.intent("WhoBuildYou", {},
   function(request, response) {
     response.say(getRandomSpeeches(whoBuildYouSpeeches));
+  }
+);
+
+alexaApp.intent("WhatDoYouLike", {},
+  function(request, response) {
+    response.say(getRandomSpeeches(whatDoYouLikeSpeeches));
   }
 );
 
